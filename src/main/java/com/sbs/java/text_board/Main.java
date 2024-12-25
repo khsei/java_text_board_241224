@@ -1,5 +1,7 @@
 package com.sbs.java.text_board;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -7,6 +9,8 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int lastArticleId = 0; // 전역변수
         Article lastArticle = null;
+        List<Article> articles = new ArrayList<>();
+
 
         System.out.println("== 자바 텍스트 게시판 시작 ==");
 
@@ -27,9 +31,43 @@ public class Main {
                 Article article = new Article(id, subject, content);
                 lastArticle = article;
 
-                System.out.println("생성 된 게시물 객체 : " + article);
+                articles.add(article);
+
+                // (삭제) System.out.println("생성 된 게시물 객체 : " + article);
                 System.out.printf("%d번 게시물이 등록되었습니다.\n", article.id);
             }
+            else if(cmd.equals("/usr/article/list")) {
+                if(articles.isEmpty()){    //  또는 if(articles.size() == 0) {}
+                    System.out.println("현재 게시물이 존재하지 않습니다.");
+                    continue;
+                }
+
+
+                System.out.println("== 게시물 리스트 ==");
+
+                System.out.println("번호 | 제목");
+
+                /*
+                // 반복문 v1
+                for(int i = 0; i < articles.size(); i++) {
+                    Article article = articles.get(i);
+                    System.out.printf("%d | %s\n", article.id, article.subject);
+                }
+                */
+
+                /*
+                // 반복문 v2
+                for(Article article : articles) {
+                    System.out.printf("%d | %s\n", article.id, article.subject);
+                }
+                 */
+
+                // 반복문 v3
+                articles.forEach(
+                        article -> System.out.printf("%d | %s\n", article.id, article.subject)
+                );
+            }
+
             else if(cmd.equals("/usr/article/detail")) {
                 Article article = lastArticle;
                 if(article == null) {
