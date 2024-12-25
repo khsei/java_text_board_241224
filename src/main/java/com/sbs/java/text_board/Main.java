@@ -2,10 +2,10 @@ package com.sbs.java.text_board;
 
 import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
+
+        int lastArticleid = 0;
         Scanner sc = new Scanner(System.in);
         System.out.println("== 자바 텍스트 게시판 시작 ==");
 
@@ -16,14 +16,21 @@ public class Main {
             if (cmd.equals("/user/article/write")) {
                 System.out.println("== 게시물 작성 ==");
                 System.out.print("제목 : ");
-                String subjectg = sc.nextLine();
+                String subject = sc.nextLine();
 
                 System.out.print("내용 : ");
                 String content = sc.nextLine();
 
-                int id = 1;
+                int id = ++lastArticleid;
 
-                System.out.printf("%d번 게시물이 등록되었습니다.\n", id);
+                Article article = new Article();
+                article.id = id;
+                article.subject = subject;
+                article.content = content;
+
+                System.out.println("생성된 게시물 객체 : " + article);
+
+                System.out.printf("%d번 게시물이 등록되었습니다.\n", article.id);
 
             }
 
@@ -41,4 +48,10 @@ public class Main {
         System.out.println("== 자바 텍스트 게시판 종료 ==");
         sc.close();
         }
+    }
+
+    class Article {
+        int id;
+        String subject;
+        String content;
     }
