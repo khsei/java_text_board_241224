@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Article lastArticle = null;
         List<Article> articles = new ArrayList<>();
 
         makeTestData(articles);
@@ -33,7 +32,6 @@ public class Main {
                 int id = ++lastArticleId;
 
                 Article article = new Article(id, subject, content);
-                lastArticle = article;
 
                 articles.add(article);
 
@@ -56,9 +54,15 @@ public class Main {
 
 
             } else if(cmd.equals("/usr/article/detail")) {
-                Article article = lastArticle;
+                if (articles.isEmpty()) {    //  또는 if(articles.size() == 0) {}
+                    System.out.println("현재 게시물이 존재하지 않습니다.");
+                    continue;
+                }
+
+                Article article = articles.get(articles.size()-1);
+
                 if(article == null) {
-                    System.out.println("게시물이 존재하지 않습니다.");
+                    System.out.println("해당 게시물이 존재하지 않습니다.");
                     continue;
                 }
                 System.out.println("== 게시물 상세보기 ==");
