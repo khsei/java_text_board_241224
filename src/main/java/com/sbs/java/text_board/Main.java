@@ -7,11 +7,12 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int lastArticleId = 0; // 전역변수
         Article lastArticle = null;
         List<Article> articles = new ArrayList<>();
 
         makeTestData(articles);
+
+        int lastArticleId = articles.get(articles.size() -1).id;
 
 
 
