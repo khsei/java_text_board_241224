@@ -11,17 +11,13 @@ public class AppTest {
         Map<String, String> params = Util.getParamsFromUrl(url);
         System.out.println(params);
 
-        System.out.println(params.get("id"));
-        System.out.println(params.get("subject"));
-        System.out.println(params.get("content"));
-        System.out.println(params.get("writerName"));
-        System.out.println(params.get("hitCount"));
-        System.out.println(params.get("calc"));
-    }
+        String urlPath = Util.getPathFromUrl(url);
+        System.out.println(urlPath);
+
     }
 
 
-class Util {
+static class Util {
     static Map<String, String> getParamsFromUrl(String url) {
         Map<String, String> params = new HashMap<>();
         String[] urlBits = url.split("\\?", 2);
@@ -43,4 +39,9 @@ class Util {
         }
         return params;
     }
+
+    static String getPathFromUrl(String url) {
+        return url.split("\\?", 2)[0];
+    }
+}
 }
